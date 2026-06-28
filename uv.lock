@@ -471,6 +471,6 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
-    { name = "pandas", specifier = ">=3.0.3" },
-    { name = "torch", specifier = ">=2.12.1" },
+    { name = "pandas", specifier = "==3.0.3" },
+    { name = "torch", specifier = "==2.12.1" },
 ]
