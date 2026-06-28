@@ -1,0 +1,22 @@
+services:
+  lstm:
+    build:
+      context: .
+      dockerfile: Dockerfile
+
+    container_name: lstm
+
+    stdin_open: true
+    tty: true
+
+    working_dir: /workdir
+
+    volumes:
+      # Change this to your local project path
+      - /Users/dhamodharan/My-Python/AI-Tutorials/04_NLP/02_dock_lstm
+
+    command: >
+      bash -c "
+        uv sync &&
+        exec bash
+      "
