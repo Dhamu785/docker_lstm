@@ -21,5 +21,3 @@ ENV PATH="/opt/lstm/bin:/root/.local/bin:${PATH}"
 
 # Default working directory
 WORKDIR /workdir
-
-CMD ["/bin/bash"]
