@@ -19,5 +19,3 @@ ENV VIRTUAL_ENV=/opt/lstm
 ENV UV_PROJECT_ENVIRONMENT=/opt/lstm
 ENV PATH="/opt/lstm/bin:/root/.local/bin:${PATH}"
 
-# Default working directory
-WORKDIR /workdir

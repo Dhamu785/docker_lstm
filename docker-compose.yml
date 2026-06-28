@@ -15,7 +15,7 @@ services:
 
     volumes:
       # Change this to your local project path
-      - /Users/dhamodharan/My-Python/AI-Tutorials/04_NLP/02_dock_lstm:/workdir
+      - .:/workdir
 
     command: >
       bash -c "
