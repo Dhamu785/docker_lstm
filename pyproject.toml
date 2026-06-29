@@ -7,4 +7,5 @@ requires-python = "==3.12.3"
 dependencies = [
     "numpy==2.5.0",
     "pandas==3.0.3",
+    "ultralytics>=8.4.82",
 ]
