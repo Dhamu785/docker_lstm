@@ -8,6 +8,9 @@ services:
 
     container_name: nlp_lstm
 
+    # Enable all GPUs
+    gpus: all
+
     stdin_open: true
     tty: true
 
