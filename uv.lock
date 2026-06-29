@@ -1141,8 +1141,8 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
-    { name = "ipykernel", specifier = ">=7.3.0" },
+    { name = "ipykernel", specifier = "==7.3.0" },
     { name = "numpy", specifier = "==2.5.0" },
     { name = "pandas", specifier = "==3.0.3" },
-    { name = "ultralytics", specifier = ">=8.4.82" },
+    { name = "ultralytics", specifier = "==8.4.82" },
 ]
