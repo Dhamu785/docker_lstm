@@ -2,12 +2,9 @@
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-import torch as t
 from copy import deepcopy as dc
 
 # %% device setup
-device = 'cuda' if t.cuda.is_available() else 'cpu'
-print(f"Available device = {device}")
 df = pd.read_csv('data/AMZN_max.csv')
 df.head()
 
@@ -35,3 +32,5 @@ shifted_df.head()
 # %%
 shifted_df.to_csv('data/lstm_amzn.csv')
 # %%
+np_array = shifted_df.to_numpy()
+np.save('data/amzn_max.npy', np_array)
