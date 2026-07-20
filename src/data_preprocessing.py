@@ -3,18 +3,23 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 from copy import deepcopy as dc
+from sklearn.preprocessing import MinMaxScaler
+import joblib
 
-# %% device setup
+from config import Config
+
+# %% Read csv and sample csv
 df = pd.read_csv('data/AMZN_max.csv')
 df.head()
 
-# %% data pre-processsing
+# %% Feature selection
 data = df[['Date', 'Close']]
 data.head()
 
 # %% data plotting
 data['Date'] = pd.to_datetime(data["Date"], utc=True).dt.date
-plt.plot(data['Date'], data['Close'])
+print(data.head())
+plt.plot(data['Date'], data['Close']);
 
 # %% dataset creation
 def data_for_lstm(df, steps):
@@ -26,11 +31,20 @@ def data_for_lstm(df, steps):
     
     return df
 
-lookback = 7
+lookback = Config.look_back
 shifted_df = data_for_lstm(data, lookback)
 shifted_df.head()
-# %%
-shifted_df.to_csv('data/lstm_amzn.csv')
+
 # %%
 np_array = shifted_df.to_numpy()
-np.save('data/amzn_max.npy', np_array)
+
+scale = MinMaxScaler(feature_range=(-1, 1))
+scaled = scale.fit_transform(np_array)
+print(scaled[:5])
+
+joblib.dump(scale, 'models/scale.pkl')
+scaled_flip = dc(np.flip(scaled, axis=1))
+scaled_flip[:5]
+
+# %%
+np.save('data/AMZN_max_norm.npy', scaled_flip)
