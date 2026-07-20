@@ -5,8 +5,10 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = "==3.12.3"
 dependencies = [
-    "ipykernel==7.3.0",
-    "numpy==2.5.0",
+    "matplotlib>=3.11.1",
+    "numpy>=2.5.0",
     "pandas==3.0.3",
-    "ultralytics==8.4.82",
+    "scikit-learn>=1.9.0",
+    "torch==2.12.1",
+    "yfinance>=1.5.1",
 ]
