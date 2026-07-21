@@ -3,7 +3,7 @@ import numpy as np
 from torch.utils.data import Dataset
 from config import Config
 import torch as t
-# %%
+
 def get_dataset(look_back: int, split_ratio: float=0.90) -> t.Tensor:
     data = np.load('data/AMZN_max_norm.npy')
     print(f"{"Shape of the file":<15} : {data.shape}")
@@ -18,9 +18,31 @@ def get_dataset(look_back: int, split_ratio: float=0.90) -> t.Tensor:
     X_train, X_test, Y_train, Y_test = X[:split_ratio].reshape((-1, look_back, 1)), X[split_ratio:].reshape((-1, look_back, 1)), Y[:split_ratio].reshape((-1, 1)), Y[split_ratio:].reshape((-1, 1))
     print(f"{"Reshaped values":<15} : {X_train.shape = }, {X_test.shape = }, {Y_train.shape = }, {Y_test.shape = }")
     
-    return X_train, X_test, Y_train, Y_test
+    return t.from_numpy(X_train).float(), t.from_numpy(X_test).float(), t.from_numpy(Y_train).float(), t.from_numpy(Y_test).float()
+
+
+class TimeSeries_data(Dataset):
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+    
+    def __len__(self):
+        return len(self.x)
+    
+    def __getitem__(self, index):
+        return self.x[index], self.y[index]
+
+def get_trainable_data():
+    x_train, x_test, y_train, y_test = get_dataset(Config.look_back)
+    train_dataset = TimeSeries_data(x_train, y_train)
+    test_dataset = TimeSeries_data(x_test, y_test)
+
+    return train_dataset, test_dataset
+
 
 # %%
-x_train, x_test, y_train, y_test = get_dataset(Config.look_back)
-
-# %%
+if __name__ == "__main__":
+    x_train, x_test, y_train, y_test = get_dataset(Config.look_back)
+    train_dataset = TimeSeries_data(x_train, y_train)
+    test_dataset = TimeSeries_data(x_test, y_test)
+    print(type(x_train))
