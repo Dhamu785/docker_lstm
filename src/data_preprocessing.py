@@ -37,14 +37,16 @@ shifted_df.head()
 
 # %%
 np_array = shifted_df.to_numpy()
+flipped = dc(np.flip(np_array, axis=1))
+print(flipped[:5])
 
 scale = MinMaxScaler(feature_range=(-1, 1))
-scaled = scale.fit_transform(np_array)
+scaled = scale.fit_transform(flipped)
 print(scaled[:5])
 
 joblib.dump(scale, 'models/scale.pkl')
-scaled_flip = dc(np.flip(scaled, axis=1))
-scaled_flip[:5]
 
 # %%
-np.save('data/AMZN_max_norm.npy', scaled_flip)
+np.save('data/AMZN_max_norm.npy', scaled)
+
+# %%
