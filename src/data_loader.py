@@ -1,6 +1,6 @@
 # %%
 import numpy as np
-from torch.utils.data import Dataset
+from torch.utils.data import Dataset, DataLoader
 from config import Config
 import torch as t
 
@@ -37,7 +37,11 @@ def get_trainable_data():
     train_dataset = TimeSeries_data(x_train, y_train)
     test_dataset = TimeSeries_data(x_test, y_test)
 
-    return train_dataset, test_dataset
+    batch_size = Config.batch_size
+    train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
+    test_loader = DataLoader(test_dataset, batch_size=batch_size, shuffle=False)
+
+    return train_loader, test_loader
 
 
 # %%
@@ -46,3 +50,14 @@ if __name__ == "__main__":
     train_dataset = TimeSeries_data(x_train, y_train)
     test_dataset = TimeSeries_data(x_test, y_test)
     print(type(x_train))
+
+    batch_size = Config.batch_size
+    train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
+    test_loader = DataLoader(test_dataset, batch_size=batch_size, shuffle=False)
+
+    print(f"{len(train_loader) = }, {len(test_loader) = }")
+
+    for x,y in train_loader:
+        print(x.shape, y.shape)
+        break
+# %%

@@ -4,7 +4,7 @@ class Config:
     look_back = 7
     epochs = 50
     batch_size = 16
-    lr = 1e-5
+    lr = 1e-2
     loss = t.nn.MSELoss()
     optim = t.optim.Adam
     device = 'cuda' if t.cuda.is_available() else 'cpu'

@@ -27,3 +27,5 @@ if __name__ == "__main__":
     pred, lst_layer = model(x)
 
     print(f"Shape of prediction = {pred.shape}")
+
+# %%
