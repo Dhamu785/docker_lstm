@@ -9,7 +9,8 @@ import joblib
 from config import Config
 
 # %% Read csv and sample csv
-df = pd.read_csv('data/AMZN_max.csv')
+stock_name = 'HDFC_max'
+df = pd.read_csv(f'data/{stock_name}.csv')
 df.head()
 
 # %% Feature selection
@@ -44,9 +45,9 @@ scale = MinMaxScaler(feature_range=(-1, 1))
 scaled = scale.fit_transform(flipped)
 print(scaled[:5])
 
-joblib.dump(scale, 'models/scale.pkl')
+joblib.dump(scale, 'models/scale_hdfc.pkl')
 
 # %%
-np.save('data/AMZN_max_norm.npy', scaled)
+np.save(f'data/{stock_name}_norm.npy', scaled)
 
 # %%

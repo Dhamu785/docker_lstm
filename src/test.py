@@ -15,13 +15,13 @@ def get_samples():
     return x_test, y_test
 
 def predict_samples(x_test):
-    dummy_x = np.zeros((733,8))
+    dummy_x = np.zeros((767,8))
     dummy_x[:,:-1] = x_test
     prediction = predict(dummy_x)
     return prediction
 
 def get_real_num(x_test, y_test):
-    combine = np.zeros((733,8))
+    combine = np.zeros((767,8))
     combine[:,:-1] = x_test
     combine[:,-1] = y_test
     unscaled = scale_inverse(combine)
@@ -51,7 +51,7 @@ def predict_next_day(data):
     res = predict(dummy, need_scale=True)
     return res
 
-a = np.array([247.48, 255.07, 249.74, 247.23, 249.98, 247.48, 244.85])
+a = np.array([809.35, 815.60, 808.10, 819.65, 777.65, 761.35, 752.70])
 
 res = predict_next_day(a)
 # %%

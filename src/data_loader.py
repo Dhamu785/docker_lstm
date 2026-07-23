@@ -5,7 +5,7 @@ from config import Config
 import torch as t
 
 def get_dataset(look_back: int, split_ratio: float=0.90) -> t.Tensor:
-    data = np.load('data/AMZN_max_norm.npy')
+    data = np.load('data/HDFC_max_norm.npy')
     print(f"{"Shape of the file":<15} : {data.shape}")
     X = data[:,:-1]
     Y = data[:,-1]

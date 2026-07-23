@@ -80,7 +80,7 @@ def train_model(lstm_model, train_data, test_data, epochs=Config.epochs, batch_s
                 'lr' : lr, 'model_state_dict' : lstm_model.state_dict(), 
                 'optimizer_state_dict' : optim.state_dict()
             }
-            t.save(checkpoint, os.path.join(sav_loc, 'latest.pth'))
+            t.save(checkpoint, os.path.join(sav_loc, 'latest_hdfc.pth'))
             progress.remove_task(batch_train_task)
             progress.remove_task(batch_test_task)
             progress.update(epoch_task, advance=1, loss=f"{test_loss[-1]:.4f}")

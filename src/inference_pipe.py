@@ -7,10 +7,10 @@ from joblib import load
 from config import Config
 from model import lstm_model
 
-scale = load('models/scale.pkl')
+scale = load('models/scale_hdfc.pkl')
 
 model = lstm_model(1,4,1, Config.device).to(Config.device)
-ckpt = t.load('runs/latest.pth', map_location=Config.device, weights_only=False)
+ckpt = t.load('runs/latest_hdfc.pth', map_location=Config.device, weights_only=False)
 model.load_state_dict(ckpt['model_state_dict'])
 model.eval()
 
