@@ -19,8 +19,8 @@ def scale_data(data:npt.NDArray[np.float32]) -> npt.NDArray[np.float32]:
     norm = scale.transform(data)
     return norm
 
-def predict(data: npt.NDArray[np.float32], scale=False) -> npt.NDArray[np.float32]:
-    if scale:
+def predict(data: npt.NDArray[np.float32], need_scale=False) -> npt.NDArray[np.float32]:
+    if need_scale:
         scaled = scale_data(data)
     else:
         scaled = data
@@ -28,11 +28,17 @@ def predict(data: npt.NDArray[np.float32], scale=False) -> npt.NDArray[np.float3
         predictions, hidden = model(t.from_numpy(scaled[:,:-1].reshape(-1,Config.look_back,1)).float().to(Config.device))
 
     pred = predictions.cpu().squeeze().numpy()
-    data[:,-1] = pred
+    print(pred)
+    print(data.shape)
+    scaled[:,-1] = pred
 
-    data = scale.inverse_transform(data)
+    data = scale.inverse_transform(scaled)
 
     return data
+
+def scale_inverse(data: npt.NDArray[np.float32]) -> npt.NDArray[np.float32]:
+    inverse = scale.inverse_transform(data)
+    return inverse
 
 # %%
 if __name__ == "__main__":
